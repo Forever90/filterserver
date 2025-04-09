@@ -74,15 +74,15 @@ public class DataencryptionServiceImpl
     public int insertDataencryption(Dataencryption dataencryption) {
         if(StringUtils.isNotEmpty(dataencryption.getDataencryptionName())){
             // 判断加密名称是否为空
-            throw new Exception("数据加密加密名称不能为空！");
+            throw new RuntimeException("数据加密加密名称不能为空！");
         }else if(dataencryption.getDataencryptionName().length() > 255){
-            throw new Exception("数据加密.加密名称长度不能超过255个字符");
+            throw new RuntimeException("数据加密.加密名称长度不能超过255个字符");
         }
         if(dataencryption.getUpdatedAt() == null){
             // 判断更新时间是否为空
-            throw new Exception("数据加密更新时间不能为空！");
+            throw new RuntimeException("数据加密更新时间不能为空！");
         }else if(isValidDate(dataencryption.getUpdatedAt())){
-            throw new Exception("数据加密更新时间日期格式错误，请输入正确的日期格式。");
+            throw new RuntimeException("数据加密更新时间日期格式错误，请输入正确的日期格式。");
         }
         return this.baseMapper.insert(dataencryption);
     }
@@ -128,11 +128,11 @@ public class DataencryptionServiceImpl
     @Override
     public int deleteDataencryptionById(Long id) {
         if(id ==null){
-            throw new Exception("删除id不能为空");
+            throw new RuntimeException("删除id不能为空");
         }
-        if(isCheceid ==null){
-            throw new Exception("删除id不能为空");
-        }
+//        if(isCheceid ==null){
+//            throw new RuntimeException("删除id不能为空");
+//        }
         return this.baseMapper.deleteById(id);
     }
     /**

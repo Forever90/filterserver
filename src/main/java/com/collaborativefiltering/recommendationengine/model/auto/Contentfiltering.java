@@ -3,6 +3,7 @@ package com.collaborativefiltering.recommendationengine.model.auto;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.collaborativefiltering.recommendationengine.model.BaseEntity;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModelProperty;
@@ -17,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Contentfiltering extends BaseEntity{
+public class Contentfiltering extends BaseEntity {
     private static final long serialVersionUID=1L;
     /** 过滤id */
     @TableId(type = IdType.ASSIGN_ID)

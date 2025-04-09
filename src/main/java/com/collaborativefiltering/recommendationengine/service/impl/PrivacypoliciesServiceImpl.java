@@ -74,21 +74,21 @@ public class PrivacypoliciesServiceImpl
     public int insertPrivacypolicies(Privacypolicies privacypolicies) {
         if(StringUtils.isNotEmpty(privacypolicies.getPolicyName())){
             // 判断政策名称是否为空
-            throw new Exception("隐私政策政策名称不能为空！");
-        }else if(privacypolicies.getPolicyName().length() > 255)){
-            throw new Exception("隐私政策.政策名称长度不能超过255个字符");
+            throw new RuntimeException("隐私政策政策名称不能为空！");
+        }else if(privacypolicies.getPolicyName().length() > 255){
+            throw new RuntimeException("隐私政策.政策名称长度不能超过255个字符");
         }
         if(privacypolicies.getEffectiveDate() == null){
             // 判断生效日期是否为空
-            throw new Exception("隐私政策生效日期不能为空！");
+            throw new RuntimeException("隐私政策生效日期不能为空！");
         }else if(isValidDate(privacypolicies.getEffectiveDate())){
-            throw new Exception("隐私政策生效日期日期格式错误，请输入正确的日期格式。");
+            throw new RuntimeException("隐私政策生效日期日期格式错误，请输入正确的日期格式。");
         }
         if(privacypolicies.getLastUpdated() == null){
             // 判断最后更新时间是否为空
-            throw new Exception("隐私政策最后更新时间不能为空！");
+            throw new RuntimeException("隐私政策最后更新时间不能为空！");
         }else if(isValidDate(privacypolicies.getLastUpdated())){
-            throw new Exception("隐私政策最后更新时间日期格式错误，请输入正确的日期格式。");
+            throw new RuntimeException("隐私政策最后更新时间日期格式错误，请输入正确的日期格式。");
         }
         return this.baseMapper.insert(privacypolicies);
     }
@@ -102,15 +102,15 @@ public class PrivacypoliciesServiceImpl
     public int updatePrivacypolicies(Privacypolicies privacypolicies) {
         if(StringUtils.isNotEmpty(privacypolicies.getPolicyName())){
             // 判断政策名称是否为空
-            throw new Exception("隐私政策政策名称不能为空！");
+            throw new RuntimeException("隐私政策政策名称不能为空！");
         }else if(privacypolicies.getPolicyName().length() > 255){
-            throw new Exception("隐私政策.政策名称长度不能超过255个字符");
+            throw new RuntimeException("隐私政策.政策名称长度不能超过255个字符");
         }
         if(privacypolicies.getEffectiveDate() == null){
             // 判断生效日期是否为空
-            throw new Exception("隐私政策生效日期不能为空！");
+            throw new RuntimeException("隐私政策生效日期不能为空！");
         }else if(isValidDate(privacypolicies.getEffectiveDate())){
-            throw new Exception("隐私政策生效日期日期格式错误，请输入正确的日期格式。");
+            throw new RuntimeException("隐私政策生效日期日期格式错误，请输入正确的日期格式。");
         }
         return this.baseMapper.updateById(privacypolicies);
     }
@@ -135,11 +135,11 @@ public class PrivacypoliciesServiceImpl
     @Override
     public int deletePrivacypoliciesById(Long id) {
         if(id ==null){
-            throw new Exception("删除id不能为空");
+            throw new RuntimeException("删除id不能为空");
         }
-        if(isCheceid ==null){
-            throw new Exception("删除id不能为空");
-        }
+//        if(isCheceid ==null){
+//            throw new RuntimeException("删除id不能为空");
+//        }
         return this.baseMapper.deleteById(id);
     }
     /**

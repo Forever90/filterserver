@@ -1,4 +1,4 @@
-package com.collaborativefiltering.recommendationengine.mapper;
+package com.collaborativefiltering.recommendationengine.mapper.auto;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.collaborativefiltering.recommendationengine.model.auto.Collaborativefiltering;

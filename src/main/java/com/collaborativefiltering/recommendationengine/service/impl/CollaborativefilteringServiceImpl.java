@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 import com.collaborativefiltering.recommendationengine.service.ICollaborativefilteringService;
-import com.collaborativefiltering.recommendationengine.mapper.CollaborativefilteringMapper;
+import com.collaborativefiltering.recommendationengine.mapper.auto.CollaborativefilteringMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,7 +74,7 @@ public class CollaborativefilteringServiceImpl extends ServiceImpl<Collaborative
         if(StringUtils.isNotEmpty(collaborativefiltering.getUserId())){
             // 判断用户id是否为空
             throw new RuntimeException("协同过滤用户id不能为空！");
-        }else if(collaborativefiltering.getUserId().length() > 255)){
+        }else if(collaborativefiltering.getUserId().length() > 255){
             throw new RuntimeException("协同过滤.用户id长度不能超过255个字符");
         }
         if(collaborativefiltering.getTimestamp() == null){
@@ -103,7 +103,7 @@ public class CollaborativefilteringServiceImpl extends ServiceImpl<Collaborative
         if(collaborativefiltering.getTimestamp() == null){
             // 判断时间戳是否为空
             throw new RuntimeException("协同过滤时间戳不能为空！");
-        }else if(isValidDate(collaborativefiltering.getTimestamp())){
+        } else if(isValidDate(collaborativefiltering.getTimestamp())){
             throw new RuntimeException("协同过滤时间戳日期格式错误，请输入正确的日期格式。");
         }
         return this.baseMapper.updateById(collaborativefiltering);

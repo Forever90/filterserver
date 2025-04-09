@@ -75,21 +75,21 @@ public class PrivacysettingsServiceImpl
     public int insertPrivacysettings(Privacysettings privacysettings) {
         if(StringUtils.isNotEmpty(privacysettings.getUserId())){
             // 判断用户id是否为空
-            throw new Exception("隐私设置用户id不能为空！");
-        }else if(privacysettings.getUserId().length() > 255)){
-            throw new Exception("隐私设置.用户id长度不能超过255个字符");
+            throw new RuntimeException("隐私设置用户id不能为空！");
+        }else if(privacysettings.getUserId().length() > 255){
+            throw new RuntimeException("隐私设置.用户id长度不能超过255个字符");
         }
         if(StringUtils.isNotEmpty(privacysettings.getProfileVisibility())){
             // 判断个人资料可见性是否为空
-            throw new Exception("隐私设置个人资料可见性不能为空！");
-        }else if(privacysettings.getProfileVisibility().length() > 255)){
-            throw new Exception("隐私设置.个人资料可见性长度不能超过255个字符");
+            throw new RuntimeException("隐私设置个人资料可见性不能为空！");
+        }else if(privacysettings.getProfileVisibility().length() > 255){
+            throw new RuntimeException("隐私设置.个人资料可见性长度不能超过255个字符");
         }
         if(privacysettings.getLastUpdated() == null){
             // 判断最后更新时间是否为空
-            throw new Exception("隐私设置最后更新时间不能为空！");
+            throw new RuntimeException("隐私设置最后更新时间不能为空！");
         }else if(isValidDate(privacysettings.getLastUpdated())){
-            throw new Exception("隐私设置最后更新时间日期格式错误，请输入正确的日期格式。");
+            throw new RuntimeException("隐私设置最后更新时间日期格式错误，请输入正确的日期格式。");
         }
         return this.baseMapper.insert(privacysettings);
     }
@@ -101,17 +101,17 @@ public class PrivacysettingsServiceImpl
      */
     @Override
     public int updatePrivacysettings(Privacysettings privacysettings) {
-        if(StringUtils.isNotEmpty(privacysettings.getUserId()){
+        if(StringUtils.isNotEmpty(privacysettings.getUserId())){
             // 判断用户id是否为空
-            throw new Exception("隐私设置用户id不能为空！");
-        }else if(privacysettings.getUserId().length() > 255)){
-            throw new Exception("隐私设置.用户id长度不能超过255个字符')
+            throw new RuntimeException("隐私设置用户id不能为空！");
+        }else if(privacysettings.getUserId().length() > 255){
+            throw new RuntimeException("隐私设置.用户id长度不能超过255个字符");
         }
         if(privacysettings.getLastUpdated() == null){
             // 判断最后更新时间是否为空
-            throw new Exception("隐私设置最后更新时间不能为空！");
+            throw new RuntimeException("隐私设置最后更新时间不能为空！");
         }else if(isValidDate(privacysettings.getLastUpdated())){
-            throw new Exception("隐私设置最后更新时间日期格式错误，请输入正确的日期格式。"')
+            throw new RuntimeException("隐私设置最后更新时间日期格式错误，请输入正确的日期格式。");
         }
         return this.baseMapper.updateById(privacysettings);
     }
@@ -135,11 +135,11 @@ public class PrivacysettingsServiceImpl
     @Override
     public int deletePrivacysettingsById(Long id) {
         if(id ==null){
-            throw new Exception("删除id不能为空");
+            throw new RuntimeException("删除id不能为空");
         }
-        if(isCheceid ==null){
-            throw new Exception("删除id不能为空");
-        }
+//        if(isCheceid ==null){
+//            throw new RuntimeException("删除id不能为空");
+//        }
         return this.baseMapper.deleteById(id);
     }
     /**
