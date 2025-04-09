@@ -1,0 +1,52 @@
+#普通数据配置
+name: develop
+
+#对象的配置
+#1
+person:
+  name: jack
+  age: 20
+  sex: male
+#2.行内对象配置
+#person: {name: 18,age: 20}
+
+#数据、集合配置(字符串数据)
+#1.
+#city:
+#  - beijing
+#  - tianjin
+#  - chongqing
+#  - shanghai
+#2.
+#city: [beijing,tianjing,chongqing,shanghai]
+#数据、集合配置(对象数据)
+#1.
+#person:
+#  - name: tom
+#    age: 20
+#  - name: lucy
+#    age: 23
+#2.
+#person: [{name: tom,age: 20},{name: lucy,age: 23}]
+
+#Map配置(同上)
+
+
+server:
+  port: 8081
+  servlet:
+    context-path: /kylindev
+
+#数据库链接信息
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: root1234
+
+#配置mybatis信息(配合xml使用)
+#mybatis:
+#  type-aliases-package: com.kylin.entity
+#  mapper-locations: classpath*:mapper/*Mapper.xml
+

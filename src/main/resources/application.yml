@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: kylin
+  profiles:
+    active: ${spring.profiles.active} #取其变量加载配置文件
