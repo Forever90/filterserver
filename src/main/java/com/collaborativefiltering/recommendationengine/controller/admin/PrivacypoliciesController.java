@@ -7,10 +7,11 @@ import com.collaborativefiltering.recommendationengine.controller.BaseController
 import com.collaborativefiltering.recommendationengine.model.custom.Tablepar;
 import com.collaborativefiltering.recommendationengine.model.auto.Privacypolicies;
 import com.collaborativefiltering.recommendationengine.service.IPrivacypoliciesService;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -33,30 +34,35 @@ public class PrivacypoliciesController extends BaseController {
      */
     @ApiOperation(value = "view", notes = "隐私政策分页跳转" )
     @GetMapping("/view" )
-    @RequiresPermissions("system:privacypolicies:view" )
+    //@RequiresPermissions("system:privacypolicies:view" )
     public String view(ModelMap model) {
         return prefix + "/list" ;
     }
     /**
      * list集合
-     * @param tablepar
+     * @param tablepar 包含分页和搜索参数
      * @return ResultTable
      */
 //    @Log(title = "隐私政策", action = "list")
-    @ApiOperation(value = "list", notes = "隐私政策分页跳转" )
+    @ApiOperation(value = "list", notes = "隐私政策分页查询" )
     @GetMapping("/list" )
-    @RequiresPermissions("system:privacypolicies:list" )
+    //@RequiresPermissions("system:privacypolicies:list" )
     @ResponseBody
     public ResultTable list(Tablepar tablepar) {
-        QueryWrapper<Privacypolicies> queryWrapper = new
-                QueryWrapper<Privacypolicies>();
+        // 设置分页参数
+        PageHelper.startPage(tablepar.getPageNum(), tablepar.getPageSize());
+        
+        // 构建查询条件
+        QueryWrapper<Privacypolicies> queryWrapper = new QueryWrapper<Privacypolicies>();
         if (StrUtil.isNotEmpty(tablepar.getSearchText())) {
-            queryWrapper.like("自定义", tablepar.getSearchText());
+            queryWrapper.like("policy_name", tablepar.getSearchText());
         }
-        PageInfo<Privacypolicies> page =
-                new PageInfo<Privacypolicies>
-                        (privacypoliciesService
-                                .selectPrivacypoliciesList(queryWrapper));
+        
+        // 执行查询
+        PageInfo<Privacypolicies> page = new PageInfo<Privacypolicies>(
+                privacypoliciesService.selectPrivacypoliciesList(queryWrapper));
+        
+        // 返回分页数据
         return pageTable(page.getList(), page.getTotal());
     }
     /**
@@ -67,9 +73,9 @@ public class PrivacypoliciesController extends BaseController {
 //    @Log(title = "隐私政策新增", action = "add")
     @ApiOperation(value = "add", notes = "新增" )
     @PostMapping("/add" )
-    @RequiresPermissions("system:privacypolicies:add" )
+    //@RequiresPermissions("system:privacypolicies:add" )
     @ResponseBody
-    public AjaxResult add(Privacypolicies privacypolicies) {
+    public AjaxResult add(@RequestBody Privacypolicies privacypolicies) {
         return toAjax(privacypoliciesService
                 .insertPrivacypolicies(privacypolicies));
     }
@@ -81,7 +87,7 @@ public class PrivacypoliciesController extends BaseController {
 //    @Log(title = "remove", action = "remove")
     @ApiOperation(value = "删除", notes = "删除" )
     @DeleteMapping("/remove" )
-    @RequiresPermissions("system:privacypolicies:remove" )
+    //@RequiresPermissions("system:privacypolicies:remove" )
     @ResponseBody
     public AjaxResult remove(String ids) {
         return toAjax(privacypoliciesService
@@ -107,10 +113,10 @@ public class PrivacypoliciesController extends BaseController {
      */
 //    @Log(title = "隐私政策修改", action = "edit")
     @ApiOperation(value = "editSave", notes = "隐私政策修改保存" )
-    @RequiresPermissions("system:privacypolicies:edit" )
+    //@RequiresPermissions("system:privacypolicies:edit" )
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(Privacypolicies privacypolicies) {
+    public AjaxResult editSave(@RequestBody Privacypolicies privacypolicies) {
         return toAjax(privacypoliciesService
                 .updatePrivacypolicies
                         (privacypolicies));

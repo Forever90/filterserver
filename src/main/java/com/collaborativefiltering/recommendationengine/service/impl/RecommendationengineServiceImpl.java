@@ -70,13 +70,13 @@ public class RecommendationengineServiceImpl extends ServiceImpl<Recommendatione
      */
     @Override
     public int insertRecommendationengine(Recommendationengine recommendationengine) {
-        if(StringUtils.isNotEmpty(recommendationengine.getRecommendationengineName())){
+        if(StringUtils.isEmpty(recommendationengine.getRecommendationengineName())){
             // 判断推荐引擎名称是否为空
             throw new RuntimeException("推荐引擎推荐引擎名称不能为空！");
         }else if(recommendationengine.getRecommendationengineName().length() > 255){
             throw new RuntimeException("推荐引擎.推荐引擎名称长度不能超过255个字符");
         }
-        if(StringUtils.isNotEmpty(recommendationengine.getAlgorithmType())){
+        if(StringUtils.isEmpty(recommendationengine.getAlgorithmType())){
             // 判断算法类型是否为空
             throw new RuntimeException("推荐引擎算法类型不能为空！");
         }else if(recommendationengine.getAlgorithmType().length() > 255){
@@ -85,9 +85,10 @@ public class RecommendationengineServiceImpl extends ServiceImpl<Recommendatione
         if(recommendationengine.getUpdatedAt() == null){
             // 判断更新时间是否为空
             throw new RuntimeException("推荐引擎更新时间不能为空！");
-        }else if(isValidDate(recommendationengine.getUpdatedAt())){
-            throw new RuntimeException("推荐引擎更新时间日期格式错误，请输入正确的日期格式。");
         }
+//        else if(isValidDate(recommendationengine.getUpdatedAt())){
+//            throw new RuntimeException("推荐引擎更新时间日期格式错误，请输入正确的日期格式。");
+//        }
         return this.baseMapper.insert(recommendationengine);
     }
     /**
@@ -98,13 +99,13 @@ public class RecommendationengineServiceImpl extends ServiceImpl<Recommendatione
      */
     @Override
     public int updateRecommendationengine(Recommendationengine recommendationengine) {
-        if(StringUtils.isNotEmpty(recommendationengine.getRecommendationengineName())){
+        if(StringUtils.isEmpty(recommendationengine.getRecommendationengineName())){
             // 判断推荐引擎名称是否为空
             throw new RuntimeException("推荐引擎推荐引擎名称不能为空！");
         }else if(recommendationengine.getRecommendationengineName().length() > 255){
             throw new RuntimeException("推荐引擎.推荐引擎名称长度不能超过255个字符");
         }
-        if(StringUtils.isNotEmpty(recommendationengine.getAlgorithmType())){
+        if(StringUtils.isEmpty(recommendationengine.getAlgorithmType())){
             // 判断算法类型是否为空
             throw new RuntimeException("推荐引擎算法类型不能为空！");
         }else if(recommendationengine.getAlgorithmType().length() > 255){
@@ -113,9 +114,10 @@ public class RecommendationengineServiceImpl extends ServiceImpl<Recommendatione
         if(recommendationengine.getUpdatedAt() == null){
             // 判断更新时间是否为空
             throw new RuntimeException("推荐引擎更新时间不能为空！");
-        }else if(isValidDate(recommendationengine.getUpdatedAt())){
-            throw new RuntimeException("推荐引擎更新时间日期格式错误，请输入正确的日期格式。");
         }
+//        else if(isValidDate(recommendationengine.getUpdatedAt())){
+//            throw new RuntimeException("推荐引擎更新时间日期格式错误，请输入正确的日期格式。");
+//        }
         return this.baseMapper.updateById(recommendationengine);
     }
     /**

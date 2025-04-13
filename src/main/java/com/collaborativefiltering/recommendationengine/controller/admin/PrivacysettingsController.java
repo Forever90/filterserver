@@ -7,10 +7,11 @@ import com.collaborativefiltering.recommendationengine.controller.BaseController
 import com.collaborativefiltering.recommendationengine.model.custom.Tablepar;
 import com.collaborativefiltering.recommendationengine.model.auto.Privacysettings;
 import com.collaborativefiltering.recommendationengine.service.IPrivacysettingsService;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -33,7 +34,7 @@ public class PrivacysettingsController extends BaseController {
      */
     @ApiOperation(value = "view", notes = "隐私设置分页跳转" )
     @GetMapping("/view" )
-    @RequiresPermissions("system:privacysettings:view" )
+    //@RequiresPermissions("system:privacysettings:view" )
     public String view(ModelMap model) {
         return prefix + "/list" ;
     }
@@ -45,7 +46,7 @@ public class PrivacysettingsController extends BaseController {
 //    @Log(title = "隐私设置", action = "list")
     @ApiOperation(value = "list", notes = "隐私设置分页跳转" )
     @GetMapping("/list" )
-    @RequiresPermissions("system:privacysettings:list" )
+    //@RequiresPermissions("system:privacysettings:list" )
     @ResponseBody
     public ResultTable list(Tablepar tablepar) {
         QueryWrapper<Privacysettings> queryWrapper = new
@@ -53,6 +54,8 @@ public class PrivacysettingsController extends BaseController {
         if (StrUtil.isNotEmpty(tablepar.getSearchText())) {
             queryWrapper.like("自定义", tablepar.getSearchText());
         }
+        // 设置分页参数
+        PageHelper.startPage(tablepar.getPageNum(), tablepar.getPageSize());
         PageInfo<Privacysettings> page =
                 new PageInfo<Privacysettings>
         (privacysettingsService
@@ -67,9 +70,9 @@ public class PrivacysettingsController extends BaseController {
 //    @Log(title = "隐私设置新增", action = "add")
     @ApiOperation(value = "add", notes = "新增" )
     @PostMapping("/add" )
-    @RequiresPermissions("system:privacysettings:add" )
+    //@RequiresPermissions("system:privacysettings:add" )
     @ResponseBody
-    public AjaxResult add(Privacysettings privacysettings) {
+    public AjaxResult add(@RequestBody Privacysettings privacysettings) {
         return toAjax(privacysettingsService
                 .insertPrivacysettings(privacysettings));
     }
@@ -81,7 +84,7 @@ public class PrivacysettingsController extends BaseController {
 //    @Log(title = "remove", action = "remove")
     @ApiOperation(value = "删除", notes = "删除" )
     @DeleteMapping("/remove" )
-    @RequiresPermissions("system:privacysettings:remove" )
+    //@RequiresPermissions("system:privacysettings:remove" )
     @ResponseBody
     public AjaxResult remove(String ids) {
         return toAjax(privacysettingsService
@@ -107,11 +110,11 @@ public class PrivacysettingsController extends BaseController {
      */
 //    @Log(title = "隐私设置修改", action = "edit")
     @ApiOperation(value = "editSave", notes = "隐私设置修改保存" )
-    @RequiresPermissions("system:privacysettings:edit" )
+    //@RequiresPermissions("system:privacysettings:edit" )
     @PostMapping("/edit" )
     @ResponseBody
     public AjaxResult editSave
-            (Privacysettings privacysettings) {
+            (@RequestBody Privacysettings privacysettings) {
         return toAjax(privacysettingsService
                 .updatePrivacysettings
                         (privacysettings));

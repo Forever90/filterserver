@@ -50,16 +50,22 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.5.7</version> <!-- 请替换为最新版本 -->
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.gitee.sunchenbin.mybatis.actable</groupId>-->
+<!--            <artifactId>mybatis-enhance-actable</artifactId>-->
+<!--            <version>1.5.0.RELEASE</version>-->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>com.baomidou</groupId>-->
+<!--                    <artifactId>mybatis-plus-annotation</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+<!--        </dependency>-->
         <!--mysql-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-        <!--redis-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-data-redis</artifactId>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -82,11 +88,11 @@
             <version>2.7.0</version>
         </dependency>
         <!--springboot对shiro集成-->
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-spring-boot-starter</artifactId>
-            <version>1.6.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.shiro</groupId>-->
+<!--            <artifactId>shiro-spring-boot-starter</artifactId>-->
+<!--            <version>1.6.0</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

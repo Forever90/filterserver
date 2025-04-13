@@ -72,7 +72,7 @@ public class PrivacypoliciesServiceImpl
      */
     @Override
     public int insertPrivacypolicies(Privacypolicies privacypolicies) {
-        if(StringUtils.isNotEmpty(privacypolicies.getPolicyName())){
+        if(StringUtils.isEmpty(privacypolicies.getPolicyName())){
             // 判断政策名称是否为空
             throw new RuntimeException("隐私政策政策名称不能为空！");
         }else if(privacypolicies.getPolicyName().length() > 255){
@@ -81,15 +81,17 @@ public class PrivacypoliciesServiceImpl
         if(privacypolicies.getEffectiveDate() == null){
             // 判断生效日期是否为空
             throw new RuntimeException("隐私政策生效日期不能为空！");
-        }else if(isValidDate(privacypolicies.getEffectiveDate())){
-            throw new RuntimeException("隐私政策生效日期日期格式错误，请输入正确的日期格式。");
         }
+//        else if(isValidDate(privacypolicies.getEffectiveDate())){
+//            throw new RuntimeException("隐私政策生效日期日期格式错误，请输入正确的日期格式。");
+//        }
         if(privacypolicies.getLastUpdated() == null){
             // 判断最后更新时间是否为空
             throw new RuntimeException("隐私政策最后更新时间不能为空！");
-        }else if(isValidDate(privacypolicies.getLastUpdated())){
-            throw new RuntimeException("隐私政策最后更新时间日期格式错误，请输入正确的日期格式。");
         }
+//        else if(isValidDate(privacypolicies.getLastUpdated())){
+//            throw new RuntimeException("隐私政策最后更新时间日期格式错误，请输入正确的日期格式。");
+//        }
         return this.baseMapper.insert(privacypolicies);
     }
     /**
@@ -100,7 +102,7 @@ public class PrivacypoliciesServiceImpl
      */
     @Override
     public int updatePrivacypolicies(Privacypolicies privacypolicies) {
-        if(StringUtils.isNotEmpty(privacypolicies.getPolicyName())){
+        if(StringUtils.isEmpty(privacypolicies.getPolicyName())){
             // 判断政策名称是否为空
             throw new RuntimeException("隐私政策政策名称不能为空！");
         }else if(privacypolicies.getPolicyName().length() > 255){
@@ -109,9 +111,10 @@ public class PrivacypoliciesServiceImpl
         if(privacypolicies.getEffectiveDate() == null){
             // 判断生效日期是否为空
             throw new RuntimeException("隐私政策生效日期不能为空！");
-        }else if(isValidDate(privacypolicies.getEffectiveDate())){
-            throw new RuntimeException("隐私政策生效日期日期格式错误，请输入正确的日期格式。");
         }
+//        else if(isValidDate(privacypolicies.getEffectiveDate())){
+//            throw new RuntimeException("隐私政策生效日期日期格式错误，请输入正确的日期格式。");
+//        }
         return this.baseMapper.updateById(privacypolicies);
     }
     /**

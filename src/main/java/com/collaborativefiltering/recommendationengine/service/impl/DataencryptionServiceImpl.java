@@ -72,7 +72,7 @@ public class DataencryptionServiceImpl
      */
     @Override
     public int insertDataencryption(Dataencryption dataencryption) {
-        if(StringUtils.isNotEmpty(dataencryption.getDataencryptionName())){
+        if(StringUtils.isEmpty(dataencryption.getDataencryptionName())){
             // 判断加密名称是否为空
             throw new RuntimeException("数据加密加密名称不能为空！");
         }else if(dataencryption.getDataencryptionName().length() > 255){
@@ -81,9 +81,10 @@ public class DataencryptionServiceImpl
         if(dataencryption.getUpdatedAt() == null){
             // 判断更新时间是否为空
             throw new RuntimeException("数据加密更新时间不能为空！");
-        }else if(isValidDate(dataencryption.getUpdatedAt())){
-            throw new RuntimeException("数据加密更新时间日期格式错误，请输入正确的日期格式。");
         }
+//        else if(isValidDate(dataencryption.getUpdatedAt())){
+//            throw new RuntimeException("数据加密更新时间日期格式错误，请输入正确的日期格式。");
+//        }
         return this.baseMapper.insert(dataencryption);
     }
     /**
@@ -94,7 +95,7 @@ public class DataencryptionServiceImpl
      */
     @Override
     public int updateDataencryption(Dataencryption dataencryption) {
-        if(StringUtils.isNotEmpty(dataencryption.getDataencryptionName())){
+        if(StringUtils.isEmpty(dataencryption.getDataencryptionName())){
             // 判断加密名称是否为空
             throw new RuntimeException("数据加密加密名称不能为空！");
         }else if(dataencryption.getDataencryptionName().length() > 255){
@@ -103,9 +104,10 @@ public class DataencryptionServiceImpl
         if(dataencryption.getUpdatedAt() == null){
             // 判断更新时间是否为空
             throw new RuntimeException("数据加密更新时间不能为空！");
-        }else if(isValidDate(dataencryption.getUpdatedAt())){
-            throw new RuntimeException("数据加密更新时间日期格式错误，请输入正确的日期格式。");
         }
+//        else if(isValidDate(dataencryption.getUpdatedAt())){
+//            throw new RuntimeException("数据加密更新时间日期格式错误，请输入正确的日期格式。");
+//        }
         return this.baseMapper.updateById(dataencryption);
     }
     /**

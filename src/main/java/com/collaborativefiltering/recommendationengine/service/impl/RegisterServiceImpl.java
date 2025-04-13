@@ -1,6 +1,6 @@
-package com.collaborativefiltering.recommendationengine.manage.user.service.impl;
+package com.collaborativefiltering.recommendationengine.service.impl;
 
-import com.collaborativefiltering.recommendationengine.manage.user.service.IAccountService;
+import com.collaborativefiltering.recommendationengine.service.IAccountService;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 

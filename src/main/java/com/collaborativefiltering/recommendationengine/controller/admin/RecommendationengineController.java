@@ -7,10 +7,11 @@ import com.collaborativefiltering.recommendationengine.controller.BaseController
 import com.collaborativefiltering.recommendationengine.model.custom.Tablepar;
 import com.collaborativefiltering.recommendationengine.model.auto.Recommendationengine;
 import com.collaborativefiltering.recommendationengine.service.IRecommendationengineService;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -33,30 +34,35 @@ public class RecommendationengineController extends BaseController {
      */
     @ApiOperation(value = "view", notes = "推荐引擎分页跳转" )
     @GetMapping("/view" )
-    @RequiresPermissions("system:recommendationengine:view" )
+    //@RequiresPermissions("system:recommendationengine:view" )
     public String view(ModelMap model) {
         return prefix + "/list" ;
     }
     /**
      * list集合
-     * @param tablepar
+     * @param tablepar 包含分页和搜索参数
      * @return ResultTable
      */
 //    @Log(title = "推荐引擎", action = "list")
-    @ApiOperation(value = "list", notes = "推荐引擎分页跳转" )
+    @ApiOperation(value = "list", notes = "推荐引擎分页查询" )
     @GetMapping("/list" )
-    @RequiresPermissions("system:recommendationengine:list" )
+    //@RequiresPermissions("system:recommendationengine:list" )
     @ResponseBody
     public ResultTable list(Tablepar tablepar) {
-        QueryWrapper<Recommendationengine> queryWrapper = new
-                QueryWrapper<Recommendationengine>();
+        // 设置分页参数
+        PageHelper.startPage(tablepar.getPageNum(), tablepar.getPageSize());
+        
+        // 构建查询条件
+        QueryWrapper<Recommendationengine> queryWrapper = new QueryWrapper<Recommendationengine>();
         if (StrUtil.isNotEmpty(tablepar.getSearchText())) {
-            queryWrapper.like("自定义", tablepar.getSearchText());
+            queryWrapper.like("user_id", tablepar.getSearchText());
         }
-        PageInfo<Recommendationengine> page =
-                new PageInfo<Recommendationengine>
-                        (recommendationengineService
-                                .selectRecommendationengineList(queryWrapper));
+        
+        // 执行查询
+        PageInfo<Recommendationengine> page = new PageInfo<Recommendationengine>(
+                recommendationengineService.selectRecommendationengineList(queryWrapper));
+        
+        // 返回分页数据
         return pageTable(page.getList(), page.getTotal());
     }
     /**
@@ -67,22 +73,21 @@ public class RecommendationengineController extends BaseController {
 //    @Log(title = "推荐引擎新增", action = "add")
     @ApiOperation(value = "add", notes = "新增" )
     @PostMapping("/add" )
-    @RequiresPermissions("system:recommendationengine:add" )
+    //@RequiresPermissions("system:recommendationengine:add" )
     @ResponseBody
-    public AjaxResult add(Recommendationengine recommendationengine) {
+    public AjaxResult add(@RequestBody Recommendationengine recommendationengine) {
         return toAjax(recommendationengineService
                 .insertRecommendationengine(recommendationengine));
     }
     /**
      * 推荐引擎删除
-     个性化隐私保护协同过滤推荐系统V1.0 11
      * @param ids
      * @return
      */
 //    @Log(title = "remove", action = "remove")
     @ApiOperation(value = "删除", notes = "删除" )
     @DeleteMapping("/remove" )
-    @RequiresPermissions("system:recommendationengine:remove" )
+    //@RequiresPermissions("system:recommendationengine:remove" )
     @ResponseBody
     public AjaxResult remove(String ids) {
         return toAjax(recommendationengineService
@@ -108,11 +113,11 @@ public class RecommendationengineController extends BaseController {
      */
 //    @Log(title = "推荐引擎修改", action = "edit")
     @ApiOperation(value = "editSave", notes = "推荐引擎修改保存" )
-    @RequiresPermissions("system:recommendationengine:edit" )
+    //@RequiresPermissions("system:recommendationengine:edit" )
     @PostMapping("/edit" )
     @ResponseBody
     public AjaxResult editSave
-    (Recommendationengine recommendationengine) {
+    (@RequestBody Recommendationengine recommendationengine) {
         return toAjax(recommendationengineService
                 .updateRecommendationengine
                         (recommendationengine));

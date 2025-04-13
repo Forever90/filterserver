@@ -72,7 +72,7 @@ public class PrivacyauditServiceImpl
      */
     @Override
     public int insertPrivacyaudit(Privacyaudit privacyaudit) {
-        if(StringUtils.isNotEmpty(privacyaudit.getUserId())){
+        if(StringUtils.isEmpty(privacyaudit.getUserId())){
             // 判断用户id是否为空
             throw new RuntimeException("隐私审计用户id不能为空！");
         }else if(privacyaudit.getUserId().length() > 255){
@@ -81,15 +81,17 @@ public class PrivacyauditServiceImpl
         if(privacyaudit.getAuditDate() == null){
             // 判断审计日期是否为空
             throw new RuntimeException("隐私审计审计日期不能为空！");
-        }else if(isValidDate(privacyaudit.getAuditDate())){
-            throw new RuntimeException("隐私审计审计日期日期格式错误，请输入正确的日期格式。");
         }
+//        else if(isValidDate(privacyaudit.getAuditDate())){
+//            throw new RuntimeException("隐私审计审计日期日期格式错误，请输入正确的日期格式。");
+//        }
         if(privacyaudit.getUpdatedAt() == null){
             // 判断更新时间是否为空
             throw new RuntimeException("隐私审计更新时间不能为空！");
-        }else if(isValidDate(privacyaudit.getUpdatedAt())){
-            throw new RuntimeException("隐私审计更新时间日期格式错误，请输入正确的日期格式。");
         }
+//        else if(isValidDate(privacyaudit.getUpdatedAt())){
+//            throw new RuntimeException("隐私审计更新时间日期格式错误，请输入正确的日期格式。");
+//        }
         return this.baseMapper.insert(privacyaudit);
     }
     /**
@@ -100,7 +102,7 @@ public class PrivacyauditServiceImpl
      */
     @Override
     public int updatePrivacyaudit(Privacyaudit privacyaudit) {
-        if(StringUtils.isNotEmpty(privacyaudit.getUserId())){
+        if(StringUtils.isEmpty(privacyaudit.getUserId())){
             // 判断用户id是否为空
             throw new RuntimeException("隐私审计用户id不能为空！");
         }else if(privacyaudit.getUserId().length() > 255){
@@ -109,22 +111,23 @@ public class PrivacyauditServiceImpl
         if(privacyaudit.getAuditDate() == null){
             // 判断审计日期是否为空
             throw new RuntimeException("隐私审计审计日期不能为空！");
-        }else if(isValidDate(privacyaudit.getAuditDate())){
-            throw new RuntimeException("隐私审计审计日期日期格式错误，请输入正确的日期格式。");
         }
-        if(StringUtils.isNotEmpty(privacyaudit.getAuditType())){
+//        else if(isValidDate(privacyaudit.getAuditDate())){
+//            throw new RuntimeException("隐私审计审计日期日期格式错误，请输入正确的日期格式。");
+//        }
+        if(StringUtils.isEmpty(privacyaudit.getAuditType())){
             // 判断审计类型是否为空
             throw new RuntimeException("隐私审计审计类型不能为空！");
         }else if(privacyaudit.getAuditType().length() > 255){
             throw new RuntimeException("隐私审计.审计类型长度不能超过255个字符");
         }
-        if(StringUtils.isNotEmpty(privacyaudit.getAuditResult())){
+        if(StringUtils.isEmpty(privacyaudit.getAuditResult())){
             // 判断审计结果是否为空
             throw new RuntimeException("隐私审计审计结果不能为空！");
         }else if(privacyaudit.getAuditResult().length() > 255){
             throw new RuntimeException("隐私审计.审计结果长度不能超过255个字符");
         }
-        if(StringUtils.isNotEmpty(privacyaudit.getAuditStatus())){
+        if(StringUtils.isEmpty(privacyaudit.getAuditStatus())){
             // 判断审计状态是否为空
             throw new RuntimeException("隐私审计审计状态不能为空！");
         }else if(privacyaudit.getAuditStatus().length() > 255){
@@ -133,9 +136,10 @@ public class PrivacyauditServiceImpl
         if(privacyaudit.getUpdatedAt() == null){
             // 判断更新时间是否为空
             throw new RuntimeException("隐私审计更新时间不能为空！");
-        }else if(isValidDate(privacyaudit.getUpdatedAt())){
-            throw new RuntimeException("隐私审计更新时间日期格式错误，请输入正确的日期格式。");
         }
+//        else if(isValidDate(privacyaudit.getUpdatedAt())){
+//            throw new RuntimeException("隐私审计更新时间日期格式错误，请输入正确的日期格式。");
+//        }
         return this.baseMapper.updateById(privacyaudit);
     }
     /**

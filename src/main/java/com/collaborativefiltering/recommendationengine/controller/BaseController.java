@@ -2,9 +2,11 @@ package com.collaborativefiltering.recommendationengine.controller;
 
 import com.collaborativefiltering.recommendationengine.common.domain.AjaxResult;
 import com.collaborativefiltering.recommendationengine.common.domain.ResultTable;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
+@Controller
 public class BaseController {
     public static ResultTable pageTable(List<?> list, long total) {
         ResultTable resultTable = new ResultTable();

@@ -6,10 +6,11 @@ import com.collaborativefiltering.recommendationengine.common.domain.ResultTable
 import com.collaborativefiltering.recommendationengine.controller.BaseController;
 import com.collaborativefiltering.recommendationengine.model.custom.Tablepar;
 import com.collaborativefiltering.recommendationengine.model.auto.Collaborativefiltering;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,6 +25,7 @@ import com.collaborativefiltering.recommendationengine.service.ICollaborativefil
 @RequestMapping("/CollaborativefilteringController" )
 public class CollaborativefilteringController extends BaseController {
     private String prefix = "admin/collaborativefiltering" ;
+
     @Autowired
     private ICollaborativefilteringService collaborativefilteringService;
     /**
@@ -33,30 +35,35 @@ public class CollaborativefilteringController extends BaseController {
      */
     @ApiOperation(value = "view", notes = "协同过滤分页跳转" )
     @GetMapping("/view" )
-    @RequiresPermissions("system:collaborativefiltering:view" )
+    //@RequiresPermissions("system:collaborativefiltering:view" )
     public String view(ModelMap model) {
         return prefix + "/list" ;
     }
     /**
      * list集合
-     * @param tablepar
+     * @param tablepar 包含分页和搜索参数
      * @return ResultTable
      */
 //    @Log(title = "协同过滤", action = "list")
-    @ApiOperation(value = "list", notes = "协同过滤分页跳转" )
+    @ApiOperation(value = "list", notes = "协同过滤分页查询" )
     @GetMapping("/list" )
-    @RequiresPermissions("system:collaborativefiltering:list" )
+    //@RequiresPermissions("system:collaborativefiltering:list" )
     @ResponseBody
     public ResultTable list(Tablepar tablepar) {
-        QueryWrapper<Collaborativefiltering> queryWrapper = new
-                QueryWrapper<Collaborativefiltering>();
+        // 设置分页参数
+        PageHelper.startPage(tablepar.getPageNum(), tablepar.getPageSize());
+        
+        // 构建查询条件
+        QueryWrapper<Collaborativefiltering> queryWrapper = new QueryWrapper<Collaborativefiltering>();
         if (StrUtil.isNotEmpty(tablepar.getSearchText())) {
-            queryWrapper.like("自定义", tablepar.getSearchText());
+            queryWrapper.like("user_id", tablepar.getSearchText());
         }
-        PageInfo<Collaborativefiltering> page =
-                new PageInfo<Collaborativefiltering>
-                        (collaborativefilteringService
-                                .selectCollaborativefilteringList(queryWrapper));
+        
+        // 执行查询
+        PageInfo<Collaborativefiltering> page = new PageInfo<Collaborativefiltering>(
+                collaborativefilteringService.selectCollaborativefilteringList(queryWrapper));
+        
+        // 返回分页数据
         return pageTable(page.getList(), page.getTotal());
     }
     /**
@@ -67,9 +74,9 @@ public class CollaborativefilteringController extends BaseController {
 //    @Log(title = "协同过滤新增", action = "add")
     @ApiOperation(value = "add", notes = "新增" )
     @PostMapping("/add" )
-    @RequiresPermissions("system:collaborativefiltering:add" )
+    //@RequiresPermissions("system:collaborativefiltering:add" )
     @ResponseBody
-    public AjaxResult add(Collaborativefiltering collaborativefiltering) {
+    public AjaxResult add(@RequestBody Collaborativefiltering collaborativefiltering) {
         return toAjax(collaborativefilteringService
                 .insertCollaborativefiltering(collaborativefiltering));
     }
@@ -81,7 +88,7 @@ public class CollaborativefilteringController extends BaseController {
 //    @Log(title = "remove", action = "remove")
     @ApiOperation(value = "删除", notes = "删除" )
     @DeleteMapping("/remove" )
-    @RequiresPermissions("system:collaborativefiltering:remove" )
+    //@RequiresPermissions("system:collaborativefiltering:remove" )
     @ResponseBody
     public AjaxResult remove(String ids) {
         return toAjax(collaborativefilteringService
@@ -102,16 +109,15 @@ public class CollaborativefilteringController extends BaseController {
     }
     /**
      * 协同过滤修改保存
-     个性化隐私保护协同过滤推荐系统V1.0 6
      * @param collaborativefiltering
      * @return
      */
 //    @Log(title = "协同过滤修改", action = "edit")
     @ApiOperation(value = "editSave", notes = "协同过滤修改保存" )
-    @RequiresPermissions("system:collaborativefiltering:edit" )
+    //@RequiresPermissions("system:collaborativefiltering:edit" )
     @PostMapping("/edit" )
     @ResponseBody
-    public AjaxResult editSave(Collaborativefiltering collaborativefiltering) {
+    public AjaxResult editSave(@RequestBody Collaborativefiltering collaborativefiltering) {
         return toAjax(collaborativefilteringService
                 .updateCollaborativefiltering
                         (collaborativefiltering));

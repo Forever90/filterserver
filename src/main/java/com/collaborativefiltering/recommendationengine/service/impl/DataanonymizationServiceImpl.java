@@ -73,7 +73,7 @@ public class DataanonymizationServiceImpl
      */
     @Override
     public int insertDataanonymization(Dataanonymization dataanonymization) {
-        if(StringUtils.isNotEmpty(dataanonymization.getDataanonymizationName())){
+        if(StringUtils.isEmpty(dataanonymization.getDataanonymizationName())){
             // 判断匿名名称是否为空
             throw new RuntimeException("数据匿名匿名名称不能为空！");
         }else if(dataanonymization.getDataanonymizationName().length() > 255){
@@ -82,15 +82,17 @@ public class DataanonymizationServiceImpl
         if(dataanonymization.getAnonymizationDate() == null){
             // 判断匿名日期是否为空
             throw new RuntimeException("数据匿名匿名日期不能为空！");
-        }else if(isValidDate(dataanonymization.getAnonymizationDate())){
-            throw new RuntimeException("数据匿名匿名日期日期格式错误，请输入正确的日期格式。");
         }
+//        else if(isValidDate(dataanonymization.getAnonymizationDate())){
+//            throw new RuntimeException("数据匿名匿名日期日期格式错误，请输入正确的日期格式。");
+//        }
         if(dataanonymization.getUpdatedAt() == null){
             // 判断更新时间是否为空
             throw new RuntimeException("数据匿名更新时间不能为空！");
-        }else if(isValidDate(dataanonymization.getUpdatedAt())){
-            throw new RuntimeException("数据匿名更新时间日期格式错误，请输入正确的日期格式。");
         }
+//        else if(isValidDate(dataanonymization.getUpdatedAt())){
+//            throw new RuntimeException("数据匿名更新时间日期格式错误，请输入正确的日期格式。");
+//        }
         return this.baseMapper.insert(dataanonymization);
     }
     /**
@@ -101,13 +103,13 @@ public class DataanonymizationServiceImpl
      */
     @Override
     public int updateDataanonymization(Dataanonymization dataanonymization) {
-        if(StringUtils.isNotEmpty(dataanonymization.getDataanonymizationName())){
+        if(StringUtils.isEmpty(dataanonymization.getDataanonymizationName())){
             // 判断匿名名称是否为空
             throw new RuntimeException("数据匿名匿名名称不能为空！");
         }else if(dataanonymization.getDataanonymizationName().length() > 255){
             throw new RuntimeException("数据匿名.匿名名称长度不能超过255个字符");
         }
-        if(StringUtils.isNotEmpty(dataanonymization.getUserId())){
+        if(StringUtils.isEmpty(dataanonymization.getUserId())){
             // 判断用户id是否为空
             throw new RuntimeException("数据匿名用户id不能为空！");
         }else if(dataanonymization.getUserId().length() > 255){
@@ -116,15 +118,17 @@ public class DataanonymizationServiceImpl
         if(dataanonymization.getAnonymizationDate() == null){
             // 判断匿名日期是否为空
             throw new RuntimeException("数据匿名匿名日期不能为空！");
-        }else if(isValidDate(dataanonymization.getAnonymizationDate())){
-            throw new RuntimeException("数据匿名匿名日期日期格式错误，请输入正确的日期格式。");
         }
+//        else if(isValidDate(dataanonymization.getAnonymizationDate())){
+//            throw new RuntimeException("数据匿名匿名日期日期格式错误，请输入正确的日期格式。");
+//        }
         if(dataanonymization.getUpdatedAt() == null){
             // 判断更新时间是否为空
             throw new RuntimeException("数据匿名更新时间不能为空！");
-        }else if(isValidDate(dataanonymization.getUpdatedAt())){
-            throw new RuntimeException("数据匿名更新时间日期格式错误，请输入正确的日期格式。");
         }
+//        else if(isValidDate(dataanonymization.getUpdatedAt())){
+//            throw new RuntimeException("数据匿名更新时间日期格式错误，请输入正确的日期格式。");
+//        }
         return this.baseMapper.updateById(dataanonymization);
     }
     /**

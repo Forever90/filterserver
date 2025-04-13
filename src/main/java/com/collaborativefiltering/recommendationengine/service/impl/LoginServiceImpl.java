@@ -1,8 +1,8 @@
-package com.collaborativefiltering.recommendationengine.manage.user.service.impl;
+package com.collaborativefiltering.recommendationengine.service.impl;
 
-import com.collaborativefiltering.recommendationengine.entity.Account;
-import com.collaborativefiltering.recommendationengine.manage.user.service.IAccountService;
-import com.collaborativefiltering.recommendationengine.mapper.AccountMapper;
+import com.collaborativefiltering.recommendationengine.model.auto.Account;
+import com.collaborativefiltering.recommendationengine.service.IAccountService;
+import com.collaborativefiltering.recommendationengine.mapper.auto.AccountMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

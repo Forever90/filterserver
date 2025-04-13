@@ -72,25 +72,25 @@ public class ContentfilteringServiceImpl
      */
     @Override
     public int insertContentfiltering(Contentfiltering contentfiltering) {
-        if(StringUtils.isNotEmpty(contentfiltering.getContentfilteringName())){
+        if(StringUtils.isEmpty(contentfiltering.getContentfilteringName())){
             // 判断过滤名称是否为空
             throw new RuntimeException("内容过滤过滤名称不能为空！");
         }else if(contentfiltering.getContentfilteringName().length() > 255){
             throw new RuntimeException("内容过滤.过滤名称长度不能超过255个字符");
         }
-        if(StringUtils.isNotEmpty(contentfiltering.getFilterType())){
+        if(StringUtils.isEmpty(contentfiltering.getFilterType())){
             // 判断过滤类型是否为空
             throw new RuntimeException("内容过滤过滤类型不能为空！");
         }else if(contentfiltering.getFilterType().length() > 255){
             throw new RuntimeException("内容过滤.过滤类型长度不能超过255个字符");
         }
-        if(StringUtils.isNotEmpty(contentfiltering.getFilterRule())){
+        if(StringUtils.isEmpty(contentfiltering.getFilterRule())){
             // 判断过滤规则是否为空
             throw new RuntimeException("内容过滤过滤规则不能为空！");
         }else if(contentfiltering.getFilterRule().length() > 255){
             throw new RuntimeException("内容过滤.过滤规则长度不能超过255个字符");
         }
-        if(StringUtils.isNotEmpty(contentfiltering.getCreatedAt())){
+        if(StringUtils.isEmpty(contentfiltering.getCreatedAt())){
             // 判断创建时间是否为空
             throw new RuntimeException("内容过滤创建时间不能为空！");
         }else if(contentfiltering.getCreatedAt().length() > 255){
@@ -99,9 +99,10 @@ public class ContentfilteringServiceImpl
         if(contentfiltering.getUpdatedAt() == null){
             // 判断更新时间是否为空
             throw new RuntimeException("内容过滤更新时间不能为空！");
-        }else if(isValidDate(contentfiltering.getUpdatedAt())){
-            throw new RuntimeException("内容过滤更新时间日期格式错误，请输入正确的日期格式。");
         }
+//        else if(isValidDate(contentfiltering.getUpdatedAt())){
+//            throw new RuntimeException("内容过滤更新时间日期格式错误，请输入正确的日期格式。");
+//        }
         return this.baseMapper.insert(contentfiltering);
     }
     /**
@@ -112,13 +113,13 @@ public class ContentfilteringServiceImpl
      */
     @Override
     public int updateContentfiltering(Contentfiltering contentfiltering) {
-        if(StringUtils.isNotEmpty(contentfiltering.getContentfilteringName())){
+        if(StringUtils.isEmpty(contentfiltering.getContentfilteringName())){
             // 判断过滤名称是否为空
             throw new RuntimeException("内容过滤过滤名称不能为空！");
         }else if(contentfiltering.getContentfilteringName().length() > 255){
             throw new RuntimeException("内容过滤.过滤名称长度不能超过255个字符");
         }
-        if(StringUtils.isNotEmpty(contentfiltering.getFilterType())){
+        if(StringUtils.isEmpty(contentfiltering.getFilterType())){
             // 判断过滤类型是否为空
             throw new RuntimeException("内容过滤过滤类型不能为空！");
         }else if(contentfiltering.getFilterType().length() > 255){
@@ -127,9 +128,10 @@ public class ContentfilteringServiceImpl
         if(contentfiltering.getUpdatedAt() == null){
             // 判断更新时间是否为空
             throw new RuntimeException("内容过滤更新时间不能为空！");
-        }else if(isValidDate(contentfiltering.getUpdatedAt())){
-            throw new RuntimeException("内容过滤更新时间日期格式错误，请输入正确的日期格式。");
         }
+//        else if(isValidDate(contentfiltering.getUpdatedAt())){
+//            throw new RuntimeException("内容过滤更新时间日期格式错误，请输入正确的日期格式。");
+//        }
         return this.baseMapper.updateById(contentfiltering);
     }
     /**

@@ -1,4 +1,4 @@
-package com.collaborativefiltering.recommendationengine.manage.user.controller;
+package com.collaborativefiltering.recommendationengine.controller.admin;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;

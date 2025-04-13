@@ -71,7 +71,7 @@ public class CollaborativefilteringServiceImpl extends ServiceImpl<Collaborative
      */
     @Override
     public int insertCollaborativefiltering(Collaborativefiltering collaborativefiltering) {
-        if(StringUtils.isNotEmpty(collaborativefiltering.getUserId())){
+        if(StringUtils.isEmpty(collaborativefiltering.getUserId())){
             // 判断用户id是否为空
             throw new RuntimeException("协同过滤用户id不能为空！");
         }else if(collaborativefiltering.getUserId().length() > 255){
@@ -80,9 +80,10 @@ public class CollaborativefilteringServiceImpl extends ServiceImpl<Collaborative
         if(collaborativefiltering.getTimestamp() == null){
             // 判断时间戳是否为空
             throw new RuntimeException("协同过滤时间戳不能为空！");
-        }else if(isValidDate(collaborativefiltering.getTimestamp())){
-            throw new RuntimeException("协同过滤时间戳日期格式错误，请输入正确的日期格式。");
         }
+//        else if(isValidDate(collaborativefiltering.getTimestamp())){
+//            throw new RuntimeException("协同过滤时间戳日期格式错误，请输入正确的日期格式。");
+//        }
         return this.baseMapper.insert(collaborativefiltering);
     }
     /**
@@ -94,7 +95,7 @@ public class CollaborativefilteringServiceImpl extends ServiceImpl<Collaborative
      */
     @Override
     public int updateCollaborativefiltering(Collaborativefiltering collaborativefiltering) {
-        if(StringUtils.isNotEmpty(collaborativefiltering.getUserId())){
+        if(StringUtils.isEmpty(collaborativefiltering.getUserId())){
             // 判断用户id是否为空
             throw new RuntimeException("协同过滤用户id不能为空！");
         }else if(collaborativefiltering.getUserId().length() > 255){
@@ -103,9 +104,10 @@ public class CollaborativefilteringServiceImpl extends ServiceImpl<Collaborative
         if(collaborativefiltering.getTimestamp() == null){
             // 判断时间戳是否为空
             throw new RuntimeException("协同过滤时间戳不能为空！");
-        } else if(isValidDate(collaborativefiltering.getTimestamp())){
-            throw new RuntimeException("协同过滤时间戳日期格式错误，请输入正确的日期格式。");
         }
+//        else if(isValidDate(collaborativefiltering.getTimestamp())){
+//            throw new RuntimeException("协同过滤时间戳日期格式错误，请输入正确的日期格式。");
+//        }
         return this.baseMapper.updateById(collaborativefiltering);
     }
     /**

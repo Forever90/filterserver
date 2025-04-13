@@ -1,9 +1,9 @@
-package com.collaborativefiltering.recommendationengine.manage.user.controller;
+package com.collaborativefiltering.recommendationengine.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
-import com.collaborativefiltering.recommendationengine.manage.user.service.IAccountService;
+import com.collaborativefiltering.recommendationengine.service.IAccountService;
 
 import javax.annotation.Resource;
 import java.util.HashMap;

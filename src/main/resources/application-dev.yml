@@ -33,20 +33,30 @@ person:
 
 
 server:
-  port: 8081
-  servlet:
-    context-path: /kylindev
+  port: 8080
+#  servlet:
+#    context-path: /kylindev
 
 #数据库链接信息
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://127.0.0.1:3306/filter?useUnicode=true&characterEncoding=utf8
     username: root
     password: root1234
+
+#mybatis:
+#  table:
+#    auto: create # 自动建表模式，可选值有update（更新模式）、create（创建模式）等
+#  model:
+#    pack: com.collaborativefiltering.recommendationengine.model.auto # 扫描用于创建表的对象的包名
+#  database:
+#    type: mysql # 数据库类型，目前只支持mysql
+#
+#mybatis-plus:
+#  mapper-locations: classpath*:com/gitee/sunchenbin/mybatis/actable/mapping/*/*.xml
 
 #配置mybatis信息(配合xml使用)
 #mybatis:
 #  type-aliases-package: com.kylin.entity
 #  mapper-locations: classpath*:mapper/*Mapper.xml
-
