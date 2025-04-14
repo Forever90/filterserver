@@ -8,11 +8,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@TableName("account" )
+@TableName("user" )
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Account {
+public class User {
 
     @TableId(type = IdType.AUTO )
     private Integer id;
@@ -28,4 +28,19 @@ public class Account {
 
     @TableField(value = "role")
     private String role;
+
+    @TableField(value = "email")
+    private String email;
+
+    @TableField(value = "phone")
+    private String phone;
+
+    @TableField(value = "status")
+    private Integer status; // 0-禁用 1-启用
+
+    @TableField(value = "createTime")
+    private String createTime;
+
+    @TableField(value = "updateTime")
+    private String updateTime;
 }

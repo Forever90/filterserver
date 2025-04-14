@@ -4,8 +4,8 @@ name: develop
 #对象的配置
 #1
 person:
-  name: jack
-  age: 20
+
+
   sex: male
 #2.行内对象配置
 #person: {name: 18,age: 20}
